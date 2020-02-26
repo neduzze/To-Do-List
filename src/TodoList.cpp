@@ -96,7 +96,7 @@ void TodoList::listAction() {
             quitList();
             break;
         default:
-            cout << "wrong option\n";
+            messages(20);
     }
 }
 
@@ -126,7 +126,7 @@ void TodoList::messages(const int &x) {
             cout << "[WARNING] \n";
             break;
         case 20:
-            cout << "[ERROR] \n";
+            cout << "[ERROR] Wrong input\n";
             break;
         default:
             cout << "debug code\n";

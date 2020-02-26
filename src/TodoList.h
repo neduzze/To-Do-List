@@ -21,7 +21,7 @@ private://methods
     void editItem();
     void quitList();
     static void messages(const int& x);
-
+//TODO: method to check input and catch errors
 public://variables
 public://methods
     TodoList();

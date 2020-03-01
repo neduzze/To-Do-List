@@ -3,7 +3,9 @@
 //
 #pragma once
 
+#include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 #define MAX_SIZE 101
 
@@ -21,10 +23,14 @@ private://methods
     void editItem();
     void quitList();
     static void messages(const int& x);
-//TODO: method to check input and catch errors
+    //methods to save to and load from file
+    static bool isEmptyFile(std::ifstream &pFile);
+    void loadList(const string &myListName);
+    void saveList(const string& myListName);
+    //TODO: method to check input and catch errors
 public://variables
 public://methods
-    TodoList();
-    void startList();
+    explicit TodoList(const char *myListName);
+    void startList(const string &myListName);
     ~TodoList();
 };

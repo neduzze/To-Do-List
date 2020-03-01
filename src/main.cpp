@@ -1,9 +1,7 @@
-#include <iostream>
 #include "TodoList.h"
-using namespace std;
-
 
 int main() {
-    TodoList T;
+    TodoList T("groceries");
+    TodoList S("BUY SOON");
     return 0;
 }

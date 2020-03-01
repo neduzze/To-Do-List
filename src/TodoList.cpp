@@ -3,19 +3,20 @@
 //
 
 #include "TodoList.h"
-#include <iostream>
-#include <string>
+#include <fstream>
 
 using namespace std;
 
-TodoList::TodoList() {
-    startList();
+TodoList::TodoList(const char *myListName) {
+    loadList(myListName);
+    startList(myListName);
 }
 
-void TodoList::startList() {
+void TodoList::startList(const string &myListName) {
     while (!quitFlag) {
         listMenu();
         listAction();
+        saveList(myListName);
 //        displayList();
     }
 }
@@ -63,6 +64,9 @@ void TodoList::removeItem() {
     cin.ignore();
     myList[x - 1].erase();
     messages(03);
+    for (auto i = x - 1; i < MAX_SIZE; i++) {
+        myList[i] = myList[i + 1];
+    }
 }
 
 void TodoList::editItem() {
@@ -122,11 +126,20 @@ void TodoList::messages(const int &x) {
         case 04:
             cout << "[INFO] Item edited!\n";
             break;
+        case 05:
+            cout << "[INFO] List loaded!\n";
+            break;
+        case 06:
+            cout << "[INFO] List saved!\n";
+            break;
         case 10:
             cout << "[WARNING] \n";
             break;
         case 20:
             cout << "[ERROR] Wrong input\n";
+            break;
+        case 21:
+            cout << "[ERROR] Unable to open list\n";
             break;
         default:
             cout << "debug code\n";
@@ -134,8 +147,53 @@ void TodoList::messages(const int &x) {
     }
 }
 
+bool TodoList::isEmptyFile(ifstream &pFile) {
+    return pFile.peek() == ifstream::traits_type::eof();
+}
+
+void TodoList::loadList(const string &myListName) {
+    string fullPath = "../files/" + myListName + ".txt";
+    string line;
+    int lineCount = 0;
+    ifstream inFile(fullPath);
+    if (inFile.is_open()) {
+        if (isEmptyFile(inFile)) {
+            messages(00);
+        } else
+            messages(05);
+
+        while (getline(inFile, line)) {
+            myList[lineCount] = line;
+            lineCount++;
+        }
+        inFile.close();
+        remove(fullPath.c_str());
+
+    } else {
+        messages(21);
+    }
+}
+
+void TodoList::saveList(const string &myListName) {
+    string fullPath = "../files/" + myListName + ".txt";
+    ofstream outFile(fullPath);
+    if (outFile.is_open() && !myList->empty()) {
+        for (const auto &i: myList) {
+            if (!i.empty())
+                outFile << i << "\n";
+        }
+        outFile.close();
+        messages(06);
+    } else {
+        outFile.close();
+        remove(fullPath.c_str());
+        messages(21);
+    }
+}
+
 TodoList::~TodoList() {
     messages(01);
 }
+
 
 

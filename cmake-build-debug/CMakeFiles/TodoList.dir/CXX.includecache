@@ -11,6 +11,8 @@ TodoList.h
 /home/nadenka/Documents/code/cpp/TodoList/src/TodoList.h
 fstream
 -
+utility
+-
 
 /home/nadenka/Documents/code/cpp/TodoList/src/TodoList.h
 iostream
@@ -19,8 +21,4 @@ string
 -
 fstream
 -
-
-/home/nadenka/Documents/code/cpp/TodoList/src/main.cpp
-TodoList.h
-/home/nadenka/Documents/code/cpp/TodoList/src/TodoList.h
 

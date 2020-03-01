@@ -1,7 +1,6 @@
 #include "TodoList.h"
 
 int main() {
-    TodoList T("groceries");
-    TodoList S("BUY SOON");
+    TodoList T("Demo List");
     return 0;
 }
